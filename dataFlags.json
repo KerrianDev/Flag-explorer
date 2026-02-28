@@ -1,0 +1,54 @@
+[
+  {
+    "id": "00000001",
+    "iso": "FR",
+    "name": "France",
+    "type": "Pays",
+    "image": "Images/France.png"
+  },
+  {
+    "id": "00000002",
+    "iso": "JP",
+    "name": "Japan",
+    "type": "Pays",
+    "image": "Images/Japan.png"
+  },
+  {
+    "id": "00000003",
+    "iso": "BR",
+    "name": "Brazil",
+    "type": "Pays",
+    "image": "Images/Brazil.png"
+  },
+  {
+    "id": "00000004",
+    "name": "European Union",
+    "type": "Organisation",
+    "image": "Images/European Union.jpg"
+  },
+  {
+    "id": "00000005",
+    "name": "La Massana",
+    "type": "Parish",
+    "image": "Images/La Massana.png"
+  },
+  {
+    "id": "00000006",
+    "name": "Central Singapore",
+    "type": "Région",
+    "image": "Images/Central Singapore.webp"
+  },
+  {
+    "id": "00000007",
+    "iso": "LK",
+    "name": "Sri Lanka",
+    "type": "Pays",
+    "image": "Images/Sri Lanka.png"
+  },
+  {
+    "id": "00000008",
+    "name": "Beirut",
+    "type": "Ville",
+    "image": "Images/Beirut.png"
+  }
+]

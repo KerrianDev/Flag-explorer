@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>World Flags Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<header class="main-nav">
+  <div class="nav-logo">🌍 Flag Explorer</div>
+  <nav>
+    <a href="index.html" data-page="index">Accueil</a>
+    <a href="flags.html" data-page="flags">Bibliothèque</a>
+    <a href="quiz.html" data-page="quiz">Quiz</a>
+    <a href="stats.html" data-page="stats">Stats</a>
+  </nav>
+</header>
+
+<!-- ===== HERO / LANDING ===== -->
+<section class="landing">
+
+  <div class="landing-left">
+    <h1>🌍 World Flags Hub</h1>
+    <p>
+      Explore, découvrez et testez vos connaissances des drapeaux du monde.
+    </p>
+
+    <div class="hero-stats">
+      Total des téléchargements : <span id="totalDownloads">0</span>
+    </div>
+
+    <!-- CTA BIEN POSITIONNÉ -->
+    <a href="flags.html" class="cta-btn">
+      Commencer l'exploration →
+    </a>
+  </div>
+
+  <div class="landing-right">
+
+  <a href="flags.html" class="home-card">
+    <div class="card-icon">📚</div>
+    <h3>Bibliothèque</h3>
+    <p>Explorez tous les drapeaux par type.</p>
+  </a>
+
+  <a href="quiz.html" class="home-card">
+    <div class="card-icon">🧠</div>
+    <h3>Quiz</h3>
+    <p>Testez vos connaissances.</p>
+  </a>
+
+  <a href="stats.html" class="home-card">
+    <div class="card-icon">🏆</div>
+    <h3>Classement</h3>
+    <p>Découvrez les drapeaux les plus téléchargés.</p>
+  </a>
+
+  <a href="stats.html" class="home-card">
+    <div class="card-icon">📊</div>
+    <h3>Statistiques</h3>
+    <p>Suivez votre progression.</p>
+  </a>
+
+</div>
+
+</section>
+
+<!-- ===== PROGRESSION SECTION ===== -->
+<section class="progression-section">
+  <div class="content">
+    <h2>🌍 Votre progression</h2>
+    <p>
+      Collectionnez les drapeaux, complétez les continents et améliorez
+      votre score grâce au quiz interactif.
+    </p>
+  </div>
+</section>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="global.js"></script>
+
+<script>
+  const links = document.querySelectorAll(".main-nav a");
+  const currentPage = window.location.pathname.split("/").pop().replace(".html","");
+  links.forEach(link => {
+    if (link.dataset.page === currentPage) {
+      link.classList.add("active");
+    }
+  });
+</script>
+
+</body>
+</html>

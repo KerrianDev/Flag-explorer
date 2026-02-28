@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Bibliothèque des drapeaux</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="main-nav">
+  <div class="nav-logo">🌍 Flag Explorer</div>
+  <nav>
+    <a href="index.html" data-page="index">Accueil</a>
+    <a href="flags.html" data-page="flags">Bibliothèque</a>
+    <a href="quiz.html" data-page="quiz">Quiz</a>
+    <a href="stats.html" data-page="stats">Stats</a>
+  </nav>
+</header>
+
+<div class="page-wrapper">
+
+  <h1 class="page-title">📚 Bibliothèque des drapeaux</h1>
+
+  <div class="section-card filters-bar">
+      <input type="text" placeholder="Rechercher un drapeau..." id="search">
+      <select id="filter">
+        <option value="all">Tous les types</option>
+        <option value="Pays">Pays</option>
+        <option value="Organisation">Organisation</option>
+        <option value="Région">Région</option>
+        <option value="Parish">Parish</option>
+        <option value="Ville">Ville</option>
+        <option value="Département">Département</option>
+        <option value="County">County</option>
+      </select>
+      <select id="sortOrder">
+        <option value="az">Nom (A-Z)</option>
+        <option value="za">Nom (Z-A)</option>
+      </select>
+  </div>
+
+  <div id="results-info" class="results-info"></div>
+  <div id="flags-container"></div>
+
+</div>
+
+<script src="flags.js"></script>
+
+<script>
+  const links = document.querySelectorAll(".main-nav a");
+  const currentPage = window.location.pathname.split("/").pop().replace(".html","");
+  links.forEach(link => {
+    if (link.dataset.page === currentPage) {
+      link.classList.add("active");
+    }
+  });
+</script>
+
+</body>
+</html>

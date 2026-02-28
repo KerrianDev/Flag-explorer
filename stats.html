@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Classements & Statistiques</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<header class="main-nav">
+  <div class="nav-logo">🌍 Flag Explorer</div>
+  <nav>
+    <a href="index.html" data-page="index">Accueil</a>
+    <a href="flags.html" data-page="flags">Bibliothèque</a>
+    <a href="quiz.html" data-page="quiz">Quiz</a>
+    <a href="stats.html" data-page="stats">Stats</a>
+  </nav>
+</header>
+
+<!-- ===== PAGE CONTENT ===== -->
+<div class="page-wrapper">
+
+  <h1 class="page-title">🏆 Classements & Statistiques</h1>
+
+  <!-- ===== CLASSEMENT TELECHARGEMENTS ===== -->
+  <div class="ranking-section">
+    <h2>🥇 Drapeaux les plus téléchargés</h2>
+    <div id="downloadRanking"></div>
+  </div>
+
+  <!-- ===== CLASSEMENT QUIZ ===== -->
+  <div class="ranking-section">
+    <h2>🧠 Meilleurs scores Quiz</h2>
+    <div id="quizRanking"></div>
+  </div>
+
+  <!-- ===== STATS GLOBALES ===== -->
+  <div class="ranking-section">
+    <h2>📊 Statistiques Globales</h2>
+    <div class="section-card">
+      <div id="stats-container"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== SCRIPT ===== -->
+<script src="stats.js"></script>
+
+<script>
+  const links = document.querySelectorAll(".main-nav a");
+  const currentPage = window.location.pathname.split("/").pop().replace(".html","");
+  links.forEach(link => {
+    if (link.dataset.page === currentPage) {
+      link.classList.add("active");
+    }
+  });
+</script>
+
+</body>
+</html>

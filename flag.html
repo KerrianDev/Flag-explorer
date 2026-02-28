@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Détail du drapeau</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="main-nav">
+  <div class="nav-logo">🌍 Flag Explorer</div>
+  <nav>
+    <a href="index.html" data-page="index">Accueil</a>
+    <a href="flags.html" data-page="flags">Bibliothèque</a>
+    <a href="quiz.html" data-page="quiz">Quiz</a>
+    <a href="stats.html" data-page="stats">Stats</a>
+  </nav>
+</header>
+
+<div class="page-wrapper">
+
+  <div id="flag-detail" class="flag-detail-card"></div>
+
+</div>
+
+<script src="flag.js"></script>
+
+<script>
+  const links = document.querySelectorAll(".main-nav a");
+  const currentPage = window.location.pathname.split("/").pop().replace(".html","");
+  links.forEach(link => {
+    if (link.dataset.page === currentPage) {
+      link.classList.add("active");
+    }
+  });
+</script>
+
+</body>
+</html>
