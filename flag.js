@@ -40,32 +40,38 @@ fetch("dataFlags.json")
     const downloadBtn = document.getElementById("downloadBtn");
     const counterDisplay = document.getElementById("downloadCounter");
 
-    downloadBtn.addEventListener("click", () => {
+    downloadBtn.addEventListener("click", async () => {
 
-      // Incrémenter compteur
-      downloadCount++;
-      localStorage.setItem(storageKey, downloadCount);
+        try {
+            const response = await fetch(flag.image);
+            const blob = await response.blob();
 
-      if (window.opener && window.opener.updateGlobalCounter) {
-        window.opener.updateGlobalCounter();
-      }
+            const url = window.URL.createObjectURL(blob);
 
-      // Mettre à jour affichage
-      counterDisplay.textContent =
-        "Téléchargements : " + downloadCount;
+            const link = document.createElement("a");
+            link.href = url;
 
-      // Lancer téléchargement
-      const link = document.createElement("a");
-      link.href = flag.image;
+            const fileName =
+            flag.name.toLowerCase().replace(/\s+/g, "-") + "-flag.png";
 
-      const fileName =
-        flag.name.toLowerCase().replace(/\s+/g, "-") + "-flag.png";
+            link.download = fileName;
 
-      link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
 
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+
+            // compteur téléchargement
+            downloadCount++;
+            localStorage.setItem(storageKey, downloadCount);
+            counterDisplay.textContent =
+            "Téléchargements : " + downloadCount;
+
+        } catch (error) {
+            console.error("Erreur téléchargement :", error);
+        }
+
     });
   })
   .catch(error => {
