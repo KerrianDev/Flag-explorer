@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="600" height="400">
+<rect width="600" height="400" x="0" y="0" fill="#c50b2f" /><rect width="600.000" height="57.143" x="0.000" y="0.000" fill="#c50b2f" /><rect width="600.000" height="57.143" x="0.000" y="57.143" fill="#33ccff" /><rect width="600.000" height="57.143" x="0.000" y="114.286" fill="#c50b2f" /><rect width="600.000" height="57.143" x="0.000" y="171.429" fill="#33ccff" /><rect width="600.000" height="57.143" x="0.000" y="228.571" fill="#c50b2f" /><rect width="600.000" height="57.143" x="0.000" y="285.714" fill="#33ccff" /><rect width="600.000" height="57.143" x="0.000" y="342.857" fill="#c50b2f" />
+<line x1="300.000" y1="0" x2="300.000000" y2="400" stroke="#33ccff" stroke-width="66.667" /></svg>

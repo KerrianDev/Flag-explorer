@@ -21,7 +21,7 @@ function updateGlobalCounter() {
 
   if (counterElement) {
     counterElement.textContent =
-      "🌍 Total des téléchargements : " + total;
+      "🌍 Total Downloads : " + total;
   }
 }
 

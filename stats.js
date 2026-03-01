@@ -21,7 +21,7 @@ function loadDownloadRanking() {
   downloads.sort((a, b) => b.value - a.value);
 
   if (downloads.length === 0) {
-    rankingContainer.innerHTML = "<p>Aucun téléchargement pour le moment.</p>";
+    rankingContainer.innerHTML = "<p>No Download</p>";
     return;
   }
 
@@ -58,7 +58,7 @@ function loadQuizRanking() {
   scores.sort((a, b) => b.score - a.score);
 
   if (scores.length === 0) {
-    rankingContainer.innerHTML = "<p>Aucun score enregistré.</p>";
+    rankingContainer.innerHTML = "<p>No Score Registered</p>";
     return;
   }
 
@@ -101,27 +101,27 @@ function loadGlobalStats() {
 
   container.innerHTML = `
     <div class="ranking-row">
-      <span>🎮 Parties jouées</span>
+      <span>🎮 Played Games</span>
       <span>${totalGames}</span>
     </div>
 
     <div class="ranking-row">
-      <span>✅ Réponses correctes</span>
+      <span>✅ Good Answers</span>
       <span>${totalCorrect}</span>
     </div>
 
     <div class="ranking-row">
-      <span>❌ Réponses incorrectes</span>
+      <span>❌ False Answers</span>
       <span>${totalWrong}</span>
     </div>
 
     <div class="ranking-row">
-      <span>📈 Taux de réussite</span>
+      <span>📈 Good Answers (%)</span>
       <span>${accuracy}%</span>
     </div>
 
     <div class="ranking-row">
-      <span>🔥 Meilleure série</span>
+      <span>🔥 Best Streak</span>
       <span>${bestStreak}</span>
     </div>
   `;

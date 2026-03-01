@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Quiz des Drapeaux</title>
+  <title>Flags Quiz</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,62 +11,55 @@
 <header class="main-nav">
   <div class="nav-logo">🌍 Flag Explorer</div>
   <nav>
-    <a href="index.html" data-page="index">Accueil</a>
-    <a href="flags.html" data-page="flags">Bibliothèque</a>
+    <a href="index.html" data-page="index">Home</a>
+    <a href="flags.html" data-page="flags">Index</a>
     <a href="quiz.html" data-page="quiz">Quiz</a>
     <a href="stats.html" data-page="stats">Stats</a>
   </nav>
 </header>
 
-<!-- ===== PAGE CONTENT ===== -->
 <div class="page-wrapper">
 
-  <h1 class="page-title">🎮 Quiz des Drapeaux</h1>
+  <h1 class="page-title">🎮 Flags Quiz</h1>
 
-  <!-- ===== PARAMÈTRES ===== -->
-  <div id="quiz-settings" class="section-card quiz-settings">
+  <!-- ===== SETUP ===== -->
+  <div class="quiz-setup">
 
     <select id="modeSelect">
-      <option value="normal">Mode Normal</option>
-      <option value="timed">Mode Chronométré (60s)</option>
+      <option value="normal">Classic Mode</option>
+      <option value="timed">Timer Mode (60s)</option>
     </select>
 
     <select id="difficultySelect">
-      <option value="4">Facile (4 choix)</option>
-      <option value="6">Moyen (6 choix)</option>
-      <option value="8">Difficile (8 choix)</option>
+      <option value="4">Easy (4 choices)</option>
+      <option value="6">Medium (6 choices)</option>
+      <option value="8">Hard (8 choices)</option>
     </select>
 
     <select id="typeSelect">
-      <option value="all">Tous les types</option>
+      <option value="all">All Types</option>
     </select>
 
-    <button id="startBtn" class="cta-btn">
-      Commencer
-    </button>
+    <button id="startBtn">Start !</button>
 
   </div>
 
   <!-- ===== QUIZ CARD ===== -->
   <div id="quiz-container" class="quiz-card" style="display:none;">
 
-    <!-- STATS -->
     <div class="quiz-stats">
       <div>🎯 Score : <span id="score">0</span></div>
       <div>🔥 Streak : <span id="streak">0</span></div>
-      <div>⏱ Temps : <span id="timer">--</span></div>
-      <div>🏆 Meilleur : <span id="bestScore">0</span></div>
+      <div>⏱ Time : <span id="timer">--</span></div>
+      <div>🏆 Best : <span id="bestScore">0</span></div>
     </div>
 
-    <!-- IMAGE -->
     <div class="quiz-image-box">
       <img id="quiz-flag" src="" alt="Drapeau">
     </div>
 
-    <!-- ANSWERS -->
     <div id="answers" class="answers-grid"></div>
 
-    <!-- COLLECTION -->
     <div class="quiz-collection">
       📚 Collection : <span id="collectionProgress">0</span>
     </div>
@@ -75,7 +68,6 @@
 
 </div>
 
-<!-- ===== SCRIPT ===== -->
 <script src="quiz.js"></script>
 
 <script>

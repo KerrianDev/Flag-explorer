@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="600" height="400">
+<rect width="600" height="400" x="0" y="0" fill="#000000" /><rect width="600.000" height="400.000" x="0.000" y="0.000" fill="#000000" />
+<polygon points="200.000,200.000 200.000,400.000 600.000,400.000 600.000,0.000" fill="#ffffff" /><g transform="translate(450.000,250.000) rotate(0.000) scale(0.587)"><path d="M -5 -150 C -87.842712 -150 -155 -82.842712 -155 0 C -155 82.842712 -87.842712 150 -5 150 C 44.839604 150 88.972932 125.68744 116.25 88.28125 C 94.874916 107.96283 66.346865 120 35 120 C -31.27417 120 -85 66.27417 -85 0 C -85 -66.27417 -31.27417 -120 35 -120 C 66.346865 -120 94.874916 -107.96283 116.25 -88.28125 C 88.972932 -125.68744 44.839604 -150 -5 -150 z " fill="#000000"  /></g></svg>

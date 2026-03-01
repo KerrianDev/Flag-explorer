@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="600" height="400">
+<rect width="600" height="400" x="0" y="0" fill="#ffff00" /><rect width="600.000" height="400.000" x="0.000" y="0.000" fill="#ffff00" />
+<path d="M 0,0 600,0 600,400 0,400 Z M 50.000,50.000 550.000,50.000 550.000,350.000 50.000,350.000 Z" fill="#000000" fill-rule="evenodd" /><line x1="0" y1="0.000" x2="600" y2="0.000" stroke="#ffff00" stroke-width="101.000" /><path d="M 0,0 600,0 600,400 0,400 Z M 25.000,25.000 575.000,25.000 575.000,375.000 25.000,375.000 Z" fill="#ff9900" fill-rule="evenodd" /><line x1="0" y1="400.000" x2="600" y2="400.000" stroke="#ffff00" stroke-width="50.000" /><path d="M 100.000,350.000 A 200.000,200.000 0.000 1,1 500.000,350.000 z" fill="#009900" /></svg>

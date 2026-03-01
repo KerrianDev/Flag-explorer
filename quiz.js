@@ -1,6 +1,44 @@
 fetch("dataFlags.json")
   .then(res => res.json())
-  .then(flags => {
+  .then(data => {
+
+    // ===== TRANSFORMER JSON HIÉRARCHIQUE → LISTE PLATE =====
+
+    function flattenFlags(data) {
+      const result = [];
+
+      for (const continent in data) {
+        for (const country in data[continent]) {
+
+          const countryData = data[continent][country];
+
+          // Flag principal
+          result.push({
+            ...countryData.flag,
+            continent,
+            country
+          });
+
+          // Subdivisions
+          for (const type in countryData.subdivisions) {
+
+            countryData.subdivisions[type].forEach(item => {
+              result.push({
+                ...item,
+                continent,
+                country,
+                subdivisionType: type
+              });
+            });
+
+          }
+        }
+      }
+
+      return result;
+    }
+
+    const flags = flattenFlags(data);
 
     // ===== ELEMENTS DOM =====
 
@@ -33,21 +71,18 @@ fetch("dataFlags.json")
 
     function updateCollection() {
 
-        // IDs valides actuels
-        const validIds = flags.map(f => f.id);
+      const validIds = flags.map(f => f.id);
 
-        // On garde uniquement les IDs encore existants
-        discovered = discovered.filter(id => validIds.includes(id));
+      discovered = discovered.filter(id => validIds.includes(id));
 
-         // On resauvegarde proprement
-         localStorage.setItem(
+      localStorage.setItem(
         "discoveredFlags",
-      JSON.stringify(discovered)
-     );
+        JSON.stringify(discovered)
+      );
 
-  collectionDisplay.textContent =
-    discovered.length + " / " + flags.length;
-}
+      collectionDisplay.textContent =
+        discovered.length + " / " + flags.length;
+    }
 
     // ===== GENERER TYPES =====
 
@@ -80,7 +115,7 @@ fetch("dataFlags.json")
       return flags.filter(f => f.type === type);
     }
 
-    // ===== SAUVEGARDE CLASSEMENT GLOBAL =====
+    // ===== SAUVEGARDE CLASSEMENT =====
 
     function saveQuizScore(name, scoreValue) {
 
@@ -102,11 +137,14 @@ fetch("dataFlags.json")
 
       if (interval) clearInterval(interval);
 
-      const playerName = prompt("Entrez votre nom pour le classement :");
+      if (score > parseInt(localStorage.getItem(currentBestKey) || 0)) {
+        localStorage.setItem(currentBestKey, score);
+      }
 
+      const playerName = prompt("Enter Your name for the Leaderboards :");
       saveQuizScore(playerName, score);
 
-      alert("Partie terminée ! Score final : " + score);
+      alert("Game Ended ! Final Score : " + score);
 
       quizContainer.style.display = "none";
     }
@@ -146,14 +184,14 @@ fetch("dataFlags.json")
 
             if (!discovered.includes(correct.id)) {
 
-                discovered.push(correct.id);
+              discovered.push(correct.id);
 
-                localStorage.setItem(
-                 "discoveredFlags",
-                 JSON.stringify(discovered)
-                 );
+              localStorage.setItem(
+                "discoveredFlags",
+                JSON.stringify(discovered)
+              );
 
-                 updateCollection(); // ← AJOUT IMPORTANT
+              updateCollection();
             }
 
             if (streak > bestStreak) {
@@ -250,4 +288,7 @@ fetch("dataFlags.json")
       updateCollection();
     };
 
+  })
+  .catch(error => {
+    console.error("Erreur chargement JSON :", error);
   });

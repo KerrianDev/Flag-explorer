@@ -1,0 +1,28 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="#ffffff" id="canvas_background" height="402" width="602" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <linearGradient y2="0.312766" x2="0.708276" y1="0.816298" x1="0.315807" id="svg_23">
+   <stop stop-color="#DAE639" offset="0"/>
+   <stop stop-color="#C6D93B" offset="0.1609"/>
+   <stop stop-color="#81AE43" offset="0.7326"/>
+   <stop stop-color="#669D46" offset="1"/>
+  </linearGradient>
+  <linearGradient y2="0.722925" x2="0.585674" y1="0.211052" x1="0.448608" id="svg_22">
+   <stop stop-color="#DAE639" offset="0"/>
+   <stop stop-color="#C6D93B" offset="0.1609"/>
+   <stop stop-color="#81AE43" offset="0.7326"/>
+   <stop stop-color="#669D46" offset="1"/>
+  </linearGradient>
+  <g stroke="null" id="svg_34">
+   <path stroke="null" id="svg_31" d="m259.892609,199.998428l40.102875,-40.260788l40.102905,40.260788l-40.102905,40.261124l-40.102875,-40.261124z" fill="#b3b3b3"/>
+   <path stroke="null" id="svg_32" fill-rule="evenodd" fill="#4d4d4d" d="m207.653992,240.248001l-27.695633,-27.804947a17.585644,17.655029 0 0 1 0,-24.910233l27.695633,-27.80864l46.18042,-46.336494l40.090637,40.248833l-46.165527,46.36264l46.165527,46.358902l-40.090637,40.263733l-46.18042,-46.373795z"/>
+   <path stroke="null" id="svg_33" fill-rule="evenodd" fill="#da251d" d="m312.391266,79.476463l79.950958,80.251472l27.699371,27.808624a17.585644,17.655029 0 0 1 0,24.910263l-27.688202,27.801178l-79.962128,80.277603a17.574495,17.643837 0 0 1 -24.808624,0l-27.699341,-27.819824l92.368286,-92.706619l-92.357147,-92.71035l27.699371,-27.812347a17.555918,17.625187 0 0 1 24.797455,0l0,0z"/>
+  </g>
+ </g>
+</svg>

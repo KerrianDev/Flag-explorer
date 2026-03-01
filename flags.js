@@ -1,6 +1,60 @@
 fetch("dataFlags.json")
-  .then(response => response.json())
-  .then(flags => {
+  .then(res => res.json())
+  .then(data => {
+
+    // ===== FLATTEN JSON =====
+
+    function flattenFlags(data) {
+      const result = [];
+
+      Object.entries(data).forEach(([continentName, countries]) => {
+
+        Object.entries(countries).forEach(([countryName, countryData]) => {
+
+          // Flag principal
+          if (countryData.flag && countryData.flag.id) {
+            result.push({
+              id: countryData.flag.id,
+              name: countryData.flag.name,
+              type: countryData.flag.type,
+              image: countryData.flag.image,
+              continent: continentName,
+              country: countryName
+            });
+          }
+
+          // Subdivisions
+          if (countryData.subdivisions) {
+            Object.entries(countryData.subdivisions).forEach(([subType, subList]) => {
+
+              if (Array.isArray(subList)) {
+                subList.forEach(sub => {
+                  if (sub && sub.id) {
+                    result.push({
+                      id: sub.id,
+                      name: sub.name,
+                      type: sub.type,
+                      image: sub.image,
+                      continent: continentName,
+                      country: countryName
+                    });
+                  }
+                });
+              }
+
+            });
+          }
+
+        });
+
+      });
+
+      return result;
+    }
+
+    const flags = flattenFlags(data);
+
+    // ===== DOM =====
 
     const container = document.getElementById("flags-container");
     const searchInput = document.getElementById("search");
@@ -9,16 +63,35 @@ fetch("dataFlags.json")
     const pagination = document.getElementById("pagination");
     const resultsInfo = document.getElementById("results-info");
 
-    const ITEMS_PER_PAGE = 20;
+    const ITEMS_PER_PAGE = 80;
     let currentPage = 1;
     let filteredFlags = [...flags];
 
+    // ===== NORMALIZE SAFE =====
+
     function normalize(text) {
+      if (!text) return "";
       return text
+        .toString()
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
     }
+
+    // ===== GENERER TYPES DYNAMIQUES TRIÉS =====
+
+    const types = [...new Set(flags.map(f => f.type))]
+      .filter(Boolean)
+      .sort((a, b) => a.localeCompare(b));
+
+    types.forEach(type => {
+      const option = document.createElement("option");
+      option.value = type;
+      option.textContent = type;
+      typeFilter.appendChild(option);
+    });
+
+    // ===== DISPLAY =====
 
     function displayFlags() {
 
@@ -55,7 +128,7 @@ fetch("dataFlags.json")
 
         card.addEventListener("click", () => {
           window.location.href =
-            "flag.html?name=" + encodeURIComponent(flag.name);
+            "flag.html?id=" + encodeURIComponent(flag.id);
         });
 
         container.appendChild(card);
@@ -63,6 +136,8 @@ fetch("dataFlags.json")
 
       updatePagination();
     }
+
+    // ===== PAGINATION =====
 
     function updatePagination() {
 
@@ -73,39 +148,56 @@ fetch("dataFlags.json")
 
       if (totalPages <= 1) return;
 
-      const prevBtn = document.createElement("div");
-      prevBtn.classList.add("page-btn");
+      const prevBtn = document.createElement("button");
       prevBtn.textContent = "←";
+      prevBtn.disabled = currentPage === 1;
       prevBtn.onclick = () => {
         if (currentPage > 1) {
           currentPage--;
           displayFlags();
         }
       };
+      pagination.appendChild(prevBtn);
 
-      const nextBtn = document.createElement("div");
-      nextBtn.classList.add("page-btn");
+      const maxVisible = 5;
+      let startPage = Math.max(1, currentPage - 2);
+      let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+
+      if (endPage - startPage < maxVisible - 1) {
+        startPage = Math.max(1, endPage - maxVisible + 1);
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        const pageBtn = document.createElement("button");
+        pageBtn.textContent = i;
+        if (i === currentPage) {
+          pageBtn.classList.add("active-page");
+        }
+        pageBtn.onclick = () => {
+          currentPage = i;
+          displayFlags();
+        };
+        pagination.appendChild(pageBtn);
+      }
+
+      const nextBtn = document.createElement("button");
       nextBtn.textContent = "→";
+      nextBtn.disabled = currentPage === totalPages;
       nextBtn.onclick = () => {
         if (currentPage < totalPages) {
           currentPage++;
           displayFlags();
         }
       };
-
-      const info = document.createElement("div");
-      info.classList.add("page-info");
-      info.textContent = `Page ${currentPage} / ${totalPages}`;
-
-      pagination.appendChild(prevBtn);
-      pagination.appendChild(info);
       pagination.appendChild(nextBtn);
     }
+
+    // ===== FILTERS =====
 
     function applyFilters() {
 
       const searchValue = searchInput
-        ? normalize(searchInput.value)
+        ? normalize(searchInput.value.trim())
         : "";
 
       const typeValue = typeFilter
@@ -116,22 +208,26 @@ fetch("dataFlags.json")
 
       filteredFlags = flags.filter(flag => {
 
+        if (!flag || !flag.name || !flag.type) return false;
+
         const nameNormalized = normalize(flag.name);
         const typeNormalized = normalize(flag.type);
 
-        const matchesAllWords = words.every(word =>
-          nameNormalized.includes(word) ||
-          typeNormalized.includes(word)
-        );
+        const matchesSearch =
+          words.length === 0 ||
+          words.every(word =>
+            nameNormalized.includes(word) ||
+            typeNormalized.includes(word)
+          );
 
-        const matchType =
+        const matchesType =
           typeValue === "all" ||
           flag.type === typeValue;
 
-        return matchesAllWords && matchType;
+        return matchesSearch && matchesType;
       });
 
-      // 🔠 TRI
+      // TRI
       if (sortOrder) {
         if (sortOrder.value === "az") {
           filteredFlags.sort((a, b) =>
@@ -148,6 +244,8 @@ fetch("dataFlags.json")
       displayFlags();
     }
 
+    // ===== EVENTS =====
+
     if (searchInput) {
       searchInput.addEventListener("input", applyFilters);
     }
@@ -160,7 +258,10 @@ fetch("dataFlags.json")
       sortOrder.addEventListener("change", applyFilters);
     }
 
+    // ===== INIT =====
+
     displayFlags();
+
   })
   .catch(error => {
     console.error("Erreur chargement JSON :", error);
