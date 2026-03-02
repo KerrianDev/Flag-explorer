@@ -2,7 +2,9 @@ fetch("./dataFlags.json")
   .then(res => res.json())
   .then(data => {
 
-    // ===== FLATTEN JSON =====
+    // =============================
+    // FLATTEN JSON
+    // =============================
 
     function flattenFlags(data) {
       const result = [];
@@ -10,7 +12,6 @@ fetch("./dataFlags.json")
       Object.entries(data).forEach(([continentName, countries]) => {
         Object.entries(countries).forEach(([countryName, countryData]) => {
 
-          // Flag principal
           if (countryData.flag?.id) {
             result.push({
               id: countryData.flag.id,
@@ -22,7 +23,6 @@ fetch("./dataFlags.json")
             });
           }
 
-          // Subdivisions
           Object.values(countryData.subdivisions || {}).forEach(list => {
             if (Array.isArray(list)) {
               list.forEach(sub => {
@@ -48,80 +48,138 @@ fetch("./dataFlags.json")
 
     const flags = flattenFlags(data);
 
-    // ===== DOM ELEMENTS =====
+    // =============================
+    // DOM ELEMENTS
+    // =============================
 
     const container = document.getElementById("flags-container");
     const searchInput = document.getElementById("search");
-    const typeFilter = document.getElementById("filter");
+    const continentFilter = document.getElementById("continentFilter");
     const countryFilter = document.getElementById("countryFilter");
+    const typeFilter = document.getElementById("filter");
     const sortOrder = document.getElementById("sortOrder");
-    const pagination = document.getElementById("pagination");
     const resultsInfo = document.getElementById("results-info");
 
-    const ITEMS_PER_PAGE = 80;
-    let currentPage = 1;
     let filteredFlags = [...flags];
+    let renderedItems = 0;
+    const LOAD_BATCH = 80;
 
-    // ===== NORMALIZE =====
+    // =============================
+    // NORMALIZE
+    // =============================
 
     function normalize(text) {
-      if (!text) return "";
       return text
-        .toString()
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+        ? text.toString().toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+        : "";
     }
 
-    // ===== GENERATE TYPE FILTER =====
+    // =============================
+    // FILTER UPDATE FUNCTIONS
+    // =============================
 
-    const types = [...new Set(flags.map(f => f.type))]
-      .filter(Boolean)
-      .sort((a, b) => a.localeCompare(b));
+    function updateContinentFilter(flagsSubset) {
 
-    types.forEach(type => {
-      const option = document.createElement("option");
-      option.value = type;
-      option.textContent = type;
-      typeFilter.appendChild(option);
-    });
+      continentFilter.innerHTML = "";
 
-    // ===== GENERATE COUNTRY FILTER =====
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "all";
+      defaultOption.textContent = "All Continents";
+      continentFilter.appendChild(defaultOption);
 
-    const countries = [...new Set(flags.map(f => f.country))]
-      .filter(Boolean)
-      .sort((a, b) => a.localeCompare(b));
+      const continents = [...new Set(flagsSubset.map(f => f.continent))]
+        .filter(Boolean)
+        .sort((a, b) => a.localeCompare(b));
 
-    countries.forEach(country => {
-      const option = document.createElement("option");
-      option.value = country;
-      option.textContent = country;
-      countryFilter.appendChild(option);
-    });
+      continents.forEach(continent => {
+        const option = document.createElement("option");
+        option.value = continent;
+        option.textContent = continent;
+        continentFilter.appendChild(option);
+      });
+    }
 
-    // ===== DISPLAY FLAGS =====
+    function updateCountryFilter(flagsSubset) {
 
-    function displayFlags() {
+      const current = countryFilter.value;
+      countryFilter.innerHTML = "";
 
-      container.innerHTML = "";
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "all";
+      defaultOption.textContent = "All Countries";
+      countryFilter.appendChild(defaultOption);
 
-      if (filteredFlags.length === 0) {
-        container.innerHTML = "<p>Aucun résultat trouvé.</p>";
-        if (pagination) pagination.innerHTML = "";
-        if (resultsInfo) resultsInfo.textContent = "0 résultat trouvé";
-        return;
+      const counts = {};
+
+      flagsSubset.forEach(flag => {
+        counts[flag.country] =
+          (counts[flag.country] || 0) + 1;
+      });
+
+      Object.entries(counts)
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .forEach(([country, count]) => {
+
+          const option = document.createElement("option");
+          option.value = country;
+          option.textContent = `${country} (${count})`;
+          countryFilter.appendChild(option);
+        });
+
+      if ([...countryFilter.options].some(o => o.value === current)) {
+        countryFilter.value = current;
+      } else {
+        countryFilter.value = "all";
       }
+    }
 
-      if (resultsInfo) {
-        resultsInfo.textContent =
-          filteredFlags.length + " résultat(s) trouvé(s)";
+    function updateTypeFilter(flagsSubset) {
+
+      const current = typeFilter.value;
+      typeFilter.innerHTML = "";
+
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "all";
+      defaultOption.textContent = "All Types";
+      typeFilter.appendChild(defaultOption);
+
+      const counts = {};
+
+      flagsSubset.forEach(flag => {
+        counts[flag.type] =
+          (counts[flag.type] || 0) + 1;
+      });
+
+      Object.entries(counts)
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .forEach(([type, count]) => {
+
+          const option = document.createElement("option");
+          option.value = type;
+          option.textContent = `${type} (${count})`;
+          typeFilter.appendChild(option);
+        });
+
+      if ([...typeFilter.options].some(o => o.value === current)) {
+        typeFilter.value = current;
+      } else {
+        typeFilter.value = "all";
       }
+    }
 
-      const start = (currentPage - 1) * ITEMS_PER_PAGE;
-      const end = start + ITEMS_PER_PAGE;
-      const pageItems = filteredFlags.slice(start, end);
+    // =============================
+    // DISPLAY FLAGS (INFINITE SCROLL)
+    // =============================
 
-      pageItems.forEach(flag => {
+    function appendFlags() {
+
+      const nextItems =
+        filteredFlags.slice(renderedItems,
+                            renderedItems + LOAD_BATCH);
+
+      nextItems.forEach(flag => {
 
         const card = document.createElement("div");
         card.classList.add("card");
@@ -138,9 +196,7 @@ fetch("./dataFlags.json")
         const type = document.createElement("small");
         type.textContent = flag.type;
 
-        card.appendChild(img);
-        card.appendChild(title);
-        card.appendChild(type);
+        card.append(img, title, type);
 
         card.addEventListener("click", () => {
           window.location.href =
@@ -150,91 +206,32 @@ fetch("./dataFlags.json")
         container.appendChild(card);
       });
 
-      updatePagination();
+      renderedItems += LOAD_BATCH;
     }
 
-    // ===== PAGINATION =====
-
-    function updatePagination() {
-
-      if (!pagination) return;
-
-      const totalPages =
-        Math.ceil(filteredFlags.length / ITEMS_PER_PAGE);
-
-      pagination.innerHTML = "";
-
-      if (totalPages <= 1) return;
-
-      const prevBtn = document.createElement("button");
-      prevBtn.textContent = "←";
-      prevBtn.disabled = currentPage === 1;
-      prevBtn.onclick = () => {
-        if (currentPage > 1) {
-          currentPage--;
-          displayFlags();
-        }
-      };
-      pagination.appendChild(prevBtn);
-
-      const maxVisible = 5;
-      let startPage = Math.max(1, currentPage - 2);
-      let endPage = Math.min(totalPages, startPage + maxVisible - 1);
-
-      if (endPage - startPage < maxVisible - 1) {
-        startPage = Math.max(1, endPage - maxVisible + 1);
-      }
-
-      for (let i = startPage; i <= endPage; i++) {
-        const pageBtn = document.createElement("button");
-        pageBtn.textContent = i;
-
-        if (i === currentPage) {
-          pageBtn.classList.add("active-page");
-        }
-
-        pageBtn.onclick = () => {
-          currentPage = i;
-          displayFlags();
-        };
-
-        pagination.appendChild(pageBtn);
-      }
-
-      const nextBtn = document.createElement("button");
-      nextBtn.textContent = "→";
-      nextBtn.disabled = currentPage === totalPages;
-      nextBtn.onclick = () => {
-        if (currentPage < totalPages) {
-          currentPage++;
-          displayFlags();
-        }
-      };
-      pagination.appendChild(nextBtn);
+    function resetDisplay() {
+      container.innerHTML = "";
+      renderedItems = 0;
+      appendFlags();
     }
 
-    // ===== APPLY FILTERS =====
+    // =============================
+    // APPLY FILTERS
+    // =============================
 
     function applyFilters() {
 
-      const searchValue = searchInput
-        ? normalize(searchInput.value.trim())
-        : "";
+      const searchValue =
+        normalize(searchInput.value.trim());
 
-      const typeValue = typeFilter
-        ? typeFilter.value
-        : "all";
-
-      const countryValue = countryFilter
-        ? countryFilter.value
-        : "all";
+      const continentValue = continentFilter.value;
+      const countryValue = countryFilter.value;
+      const typeValue = typeFilter.value;
 
       const words =
-        searchValue.split(" ").filter(w => w !== "");
+        searchValue.split(" ").filter(w => w);
 
       filteredFlags = flags.filter(flag => {
-
-        if (!flag?.name || !flag?.type) return false;
 
         const nameNormalized = normalize(flag.name);
         const typeNormalized = normalize(flag.type);
@@ -246,55 +243,98 @@ fetch("./dataFlags.json")
             typeNormalized.includes(word)
           );
 
-        const matchesType =
-          typeValue === "all" ||
-          flag.type === typeValue;
+        const matchesContinent =
+          continentValue === "all" ||
+          flag.continent === continentValue;
 
         const matchesCountry =
           countryValue === "all" ||
           flag.country === countryValue;
 
-        return matchesSearch && matchesType && matchesCountry;
+        const matchesType =
+          typeValue === "all" ||
+          flag.type === typeValue;
+
+        return matchesSearch &&
+               matchesContinent &&
+               matchesCountry &&
+               matchesType;
       });
 
-      // TRI
-      if (sortOrder) {
-        if (sortOrder.value === "az") {
-          filteredFlags.sort((a, b) =>
-            a.name.localeCompare(b.name, "fr", { sensitivity: "base" })
-          );
-        } else {
-          filteredFlags.sort((a, b) =>
-            b.name.localeCompare(a.name, "fr", { sensitivity: "base" })
-          );
-        }
+      if (sortOrder.value === "az") {
+        filteredFlags.sort((a, b) =>
+          a.name.localeCompare(b.name, "fr", { sensitivity: "base" })
+        );
+      } else {
+        filteredFlags.sort((a, b) =>
+          b.name.localeCompare(a.name, "fr", { sensitivity: "base" })
+        );
       }
 
-      currentPage = 1;
-      displayFlags();
+      resultsInfo.textContent =
+        `${filteredFlags.length} résultat(s) trouvé(s)`;
+
+      resetDisplay();
     }
 
-    // ===== EVENTS =====
+    // =============================
+    // EVENTS
+    // =============================
 
-    if (searchInput) {
-      searchInput.addEventListener("input", applyFilters);
-    }
+    searchInput.addEventListener("input", applyFilters);
 
-    if (typeFilter) {
-      typeFilter.addEventListener("change", applyFilters);
-    }
+    continentFilter.addEventListener("change", () => {
 
-    if (countryFilter) {
-      countryFilter.addEventListener("change", applyFilters);
-    }
+      const subset =
+        continentFilter.value === "all"
+          ? flags
+          : flags.filter(f =>
+              f.continent === continentFilter.value
+            );
 
-    if (sortOrder) {
-      sortOrder.addEventListener("change", applyFilters);
-    }
+      updateCountryFilter(subset);
+      updateTypeFilter(subset);
+      applyFilters();
+    });
 
-    // ===== INIT =====
+    countryFilter.addEventListener("change", () => {
 
-    displayFlags();
+      const subset =
+        countryFilter.value === "all"
+          ? flags
+          : flags.filter(f =>
+              f.country === countryFilter.value
+            );
+
+      updateTypeFilter(subset);
+      applyFilters();
+    });
+
+    typeFilter.addEventListener("change", applyFilters);
+    sortOrder.addEventListener("change", applyFilters);
+
+    // Infinite scroll
+    window.addEventListener("scroll", () => {
+      if (window.innerHeight + window.scrollY
+          >= document.body.offsetHeight - 400) {
+        if (renderedItems < filteredFlags.length) {
+          appendFlags();
+        }
+      }
+    });
+
+    // =============================
+    // INIT
+    // =============================
+
+    updateContinentFilter(flags);
+    updateCountryFilter(flags);
+    updateTypeFilter(flags);
+
+    resultsInfo.textContent =
+      `${flags.length} résultat(s) trouvé(s)`;
+
+    resetDisplay();
 
   })
   .catch(error => {
