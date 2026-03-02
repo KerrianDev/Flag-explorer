@@ -96,43 +96,61 @@ a {
   text-shadow: 0 0 20px rgba(46,125,50,0.3);
 }
 
-/* ============================= */
-/* ===== FILTER BAR ============ */
-/* ============================= */
+/* ===== FILTER BAR ===== */
 
 .filters-bar {
   display: flex;
-  justify-content: center;
-  gap: 15px;
-  max-width: 700px;
-  margin: 30px auto 50px auto;
-  padding: 18px 25px;
-  background: rgba(20,20,20,0.7);
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.05);
+  align-items: center;
+  gap: 18px;
+  padding: 18px 22px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(10px);
+  flex-wrap: wrap;
 }
 
+/* Champ recherche plus large */
+.filters-bar input {
+  flex: 1.5;
+  min-width: 220px;
+}
+
+/* Selects largeur cohérente */
+.filters-bar select {
+  flex: 1;
+  min-width: 170px;
+}
+
+/* Harmonisation globale */
 .filters-bar input,
 .filters-bar select {
-  background: #111;
-  border: 1px solid #2a2a2a;
   padding: 10px 14px;
   border-radius: 10px;
-  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(0,0,0,0.35);
+  color: white;
   font-size: 14px;
-  transition: 0.3s ease;
+  transition: all 0.2s ease;
 }
 
-.filters-bar input {
-  flex: 1;
-}
-
+/* Focus plus premium */
 .filters-bar input:focus,
 .filters-bar select:focus {
   outline: none;
-  border-color: #2e7d32;
-  box-shadow: 0 0 0 2px rgba(46,125,50,0.2);
+  border-color: #3fa9f5;
+  box-shadow: 0 0 0 2px rgba(63,169,245,0.3);
+}
+
+.filters-bar select {
+  background-color: #111;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Dropdown menu */
+.filters-bar select option {
+  background-color: #111;
+  color: #fff;
 }
 
 /* ============================= */

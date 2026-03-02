@@ -1,4 +1,4 @@
-fetch("dataFlags.json")
+fetch("./dataFlags.json")
   .then(res => res.json())
   .then(data => {
 
@@ -8,11 +8,10 @@ fetch("dataFlags.json")
       const result = [];
 
       Object.entries(data).forEach(([continentName, countries]) => {
-
         Object.entries(countries).forEach(([countryName, countryData]) => {
 
           // Flag principal
-          if (countryData.flag && countryData.flag.id) {
+          if (countryData.flag?.id) {
             result.push({
               id: countryData.flag.id,
               name: countryData.flag.name,
@@ -24,29 +23,24 @@ fetch("dataFlags.json")
           }
 
           // Subdivisions
-          if (countryData.subdivisions) {
-            Object.entries(countryData.subdivisions).forEach(([subType, subList]) => {
-
-              if (Array.isArray(subList)) {
-                subList.forEach(sub => {
-                  if (sub && sub.id) {
-                    result.push({
-                      id: sub.id,
-                      name: sub.name,
-                      type: sub.type,
-                      image: sub.image,
-                      continent: continentName,
-                      country: countryName
-                    });
-                  }
-                });
-              }
-
-            });
-          }
+          Object.values(countryData.subdivisions || {}).forEach(list => {
+            if (Array.isArray(list)) {
+              list.forEach(sub => {
+                if (sub?.id) {
+                  result.push({
+                    id: sub.id,
+                    name: sub.name,
+                    type: sub.type,
+                    image: sub.image,
+                    continent: continentName,
+                    country: countryName
+                  });
+                }
+              });
+            }
+          });
 
         });
-
       });
 
       return result;
@@ -54,11 +48,12 @@ fetch("dataFlags.json")
 
     const flags = flattenFlags(data);
 
-    // ===== DOM =====
+    // ===== DOM ELEMENTS =====
 
     const container = document.getElementById("flags-container");
     const searchInput = document.getElementById("search");
     const typeFilter = document.getElementById("filter");
+    const countryFilter = document.getElementById("countryFilter");
     const sortOrder = document.getElementById("sortOrder");
     const pagination = document.getElementById("pagination");
     const resultsInfo = document.getElementById("results-info");
@@ -67,7 +62,7 @@ fetch("dataFlags.json")
     let currentPage = 1;
     let filteredFlags = [...flags];
 
-    // ===== NORMALIZE SAFE =====
+    // ===== NORMALIZE =====
 
     function normalize(text) {
       if (!text) return "";
@@ -78,7 +73,7 @@ fetch("dataFlags.json")
         .replace(/[\u0300-\u036f]/g, "");
     }
 
-    // ===== GENERER TYPES DYNAMIQUES TRIÉS =====
+    // ===== GENERATE TYPE FILTER =====
 
     const types = [...new Set(flags.map(f => f.type))]
       .filter(Boolean)
@@ -91,7 +86,20 @@ fetch("dataFlags.json")
       typeFilter.appendChild(option);
     });
 
-    // ===== DISPLAY =====
+    // ===== GENERATE COUNTRY FILTER =====
+
+    const countries = [...new Set(flags.map(f => f.country))]
+      .filter(Boolean)
+      .sort((a, b) => a.localeCompare(b));
+
+    countries.forEach(country => {
+      const option = document.createElement("option");
+      option.value = country;
+      option.textContent = country;
+      countryFilter.appendChild(option);
+    });
+
+    // ===== DISPLAY FLAGS =====
 
     function displayFlags() {
 
@@ -117,14 +125,22 @@ fetch("dataFlags.json")
 
         const card = document.createElement("div");
         card.classList.add("card");
-
-        card.innerHTML = `
-          <img src="${flag.image}" alt="${flag.name}">
-          <h3>${flag.name}</h3>
-          <small>${flag.type}</small>
-        `;
-
         card.style.cursor = "pointer";
+
+        const img = document.createElement("img");
+        img.src = flag.image;
+        img.alt = flag.name;
+        img.loading = "lazy";
+
+        const title = document.createElement("h3");
+        title.textContent = flag.name;
+
+        const type = document.createElement("small");
+        type.textContent = flag.type;
+
+        card.appendChild(img);
+        card.appendChild(title);
+        card.appendChild(type);
 
         card.addEventListener("click", () => {
           window.location.href =
@@ -143,7 +159,9 @@ fetch("dataFlags.json")
 
       if (!pagination) return;
 
-      const totalPages = Math.ceil(filteredFlags.length / ITEMS_PER_PAGE);
+      const totalPages =
+        Math.ceil(filteredFlags.length / ITEMS_PER_PAGE);
+
       pagination.innerHTML = "";
 
       if (totalPages <= 1) return;
@@ -170,13 +188,16 @@ fetch("dataFlags.json")
       for (let i = startPage; i <= endPage; i++) {
         const pageBtn = document.createElement("button");
         pageBtn.textContent = i;
+
         if (i === currentPage) {
           pageBtn.classList.add("active-page");
         }
+
         pageBtn.onclick = () => {
           currentPage = i;
           displayFlags();
         };
+
         pagination.appendChild(pageBtn);
       }
 
@@ -192,7 +213,7 @@ fetch("dataFlags.json")
       pagination.appendChild(nextBtn);
     }
 
-    // ===== FILTERS =====
+    // ===== APPLY FILTERS =====
 
     function applyFilters() {
 
@@ -204,11 +225,16 @@ fetch("dataFlags.json")
         ? typeFilter.value
         : "all";
 
-      const words = searchValue.split(" ").filter(w => w !== "");
+      const countryValue = countryFilter
+        ? countryFilter.value
+        : "all";
+
+      const words =
+        searchValue.split(" ").filter(w => w !== "");
 
       filteredFlags = flags.filter(flag => {
 
-        if (!flag || !flag.name || !flag.type) return false;
+        if (!flag?.name || !flag?.type) return false;
 
         const nameNormalized = normalize(flag.name);
         const typeNormalized = normalize(flag.type);
@@ -224,7 +250,11 @@ fetch("dataFlags.json")
           typeValue === "all" ||
           flag.type === typeValue;
 
-        return matchesSearch && matchesType;
+        const matchesCountry =
+          countryValue === "all" ||
+          flag.country === countryValue;
+
+        return matchesSearch && matchesType && matchesCountry;
       });
 
       // TRI
@@ -252,6 +282,10 @@ fetch("dataFlags.json")
 
     if (typeFilter) {
       typeFilter.addEventListener("change", applyFilters);
+    }
+
+    if (countryFilter) {
+      countryFilter.addEventListener("change", applyFilters);
     }
 
     if (sortOrder) {
