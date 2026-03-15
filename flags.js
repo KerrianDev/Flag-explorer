@@ -82,6 +82,7 @@ fetch("./dataFlags.json")
 
     function updateContinentFilter(flagsSubset) {
 
+      const current = continentFilter.value;
       continentFilter.innerHTML = "";
 
       const defaultOption = document.createElement("option");
@@ -89,16 +90,28 @@ fetch("./dataFlags.json")
       defaultOption.textContent = "All Continents";
       continentFilter.appendChild(defaultOption);
 
-      const continents = [...new Set(flagsSubset.map(f => f.continent))]
-        .filter(Boolean)
-        .sort((a, b) => a.localeCompare(b));
+      const counts = {};
 
-      continents.forEach(continent => {
-        const option = document.createElement("option");
-        option.value = continent;
-        option.textContent = continent;
-        continentFilter.appendChild(option);
+      flagsSubset.forEach(flag => {
+        counts[flag.continent] =
+          (counts[flag.continent] || 0) + 1;
       });
+
+      Object.entries(counts)
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .forEach(([continent, count]) => {
+
+          const option = document.createElement("option");
+          option.value = continent;
+          option.textContent = `${continent} (${count})`;
+          continentFilter.appendChild(option);
+        });
+
+      if ([...continentFilter.options].some(o => o.value === current)) {
+        continentFilter.value = current;
+      } else {
+        continentFilter.value = "all";
+      }
     }
 
     function updateCountryFilter(flagsSubset) {
@@ -313,7 +326,6 @@ fetch("./dataFlags.json")
     typeFilter.addEventListener("change", applyFilters);
     sortOrder.addEventListener("change", applyFilters);
 
-    // Infinite scroll
     window.addEventListener("scroll", () => {
       if (window.innerHeight + window.scrollY
           >= document.body.offsetHeight - 400) {
