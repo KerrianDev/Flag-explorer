@@ -2879,20 +2879,18 @@
             "name": "French West Africa",
             "type": "Colonial Entity",
             "image": "FLAGS/Africa/France (colonial)/Colonial Entity/French West Africa.png"
-          }
-        ],
-        "Protectorate": [
+          },
           {
             "id": "00000454",
             "name": "Morocco (French Protectorate)",
-            "type": "Protectorate",
-            "image": "FLAGS/Africa/France (colonial)/Protectorate/Morocco (French Protectorate).png"
+            "type": "Colonial Entity",
+            "image": "FLAGS/Africa/France (colonial)/Colonial Entity/Morocco (French Protectorate).png"
           },
           {
             "id": "00000455",
             "name": "Tunisia (French Protectorate)",
-            "type": "Protectorate",
-            "image": "FLAGS/Africa/France (colonial)/Protectorate/Tunisia (French Protectorate).png"
+            "type": "Colonial Entity",
+            "image": "FLAGS/Africa/France (colonial)/Colonial Entity/Tunisia (French Protectorate).png"
           }
         ]
       }
@@ -3024,18 +3022,18 @@
     "Germany (colonial)": {
       "flag": null,
       "subdivisions": {
-        "Colony": [
+        "Colonial Entity": [
           {
             "id": "00000474",
             "name": "German East Africa",
-            "type": "Colony",
-            "image": "FLAGS/Africa/Germany (colonial)/Colony/German East Africa.png"
+            "type": "Colonial Entity",
+            "image": "FLAGS/Africa/Germany (colonial)/Colonial Entity/German East Africa.png"
           },
           {
             "id": "00000475",
             "name": "German South West",
-            "type": "Colony",
-            "image": "FLAGS/Africa/Germany (colonial)/Colony/German South West.png"
+            "type": "Colonial Entity",
+            "image": "FLAGS/Africa/Germany (colonial)/Colonial Entity/German South West.png"
           }
         ]
       }
@@ -3403,18 +3401,18 @@
     "Italy (colonial)": {
       "flag": null,
       "subdivisions": {
-        "Colony": [
+        "Colonial Entity": [
           {
             "id": "00000531",
             "name": "Italian Eritrea",
-            "type": "Colony",
-            "image": "FLAGS/Africa/Italy (colonial)/Colony/Italian Eritrea.png"
+            "type": "Colonial Entity",
+            "image": "FLAGS/Africa/Italy (colonial)/Colonial Entity/Italian Eritrea.png"
           },
           {
             "id": "00000532",
             "name": "Italian Lybia",
-            "type": "Colony",
-            "image": "FLAGS/Africa/Italy (colonial)/Colony/Italian Lybia.jpg"
+            "type": "Colonial Entity",
+            "image": "FLAGS/Africa/Italy (colonial)/Colonial Entity/Italian Lybia.jpg"
           }
         ]
       }
@@ -9690,24 +9688,24 @@
     "United Kingdom (colonial)": {
       "flag": null,
       "subdivisions": {
-        "Crown Colony": [
+        "Colonial Entity": [
           {
             "id": "00001528",
             "name": "Gold Coast",
-            "type": "Crown Colony",
-            "image": "FLAGS/Africa/United Kingdom (colonial)/Crown Colony/Gold Coast.png"
+            "type": "Colonial Entity",
+            "image": "FLAGS/Africa/United Kingdom (colonial)/Colonial Entity/Gold Coast.png"
           },
           {
             "id": "00001529",
             "name": "Kenya Colony",
-            "type": "Crown Colony",
-            "image": "FLAGS/Africa/United Kingdom (colonial)/Crown Colony/Kenya Colony.png"
+            "type": "Colonial Entity",
+            "image": "FLAGS/Africa/United Kingdom (colonial)/Colonial Entity/Kenya Colony.png"
           },
           {
             "id": "00001530",
             "name": "Nigeria Colony",
-            "type": "Crown Colony",
-            "image": "FLAGS/Africa/United Kingdom (colonial)/Crown Colony/Nigeria Colony.png"
+            "type": "Colonial Entity",
+            "image": "FLAGS/Africa/United Kingdom (colonial)/Colonial Entity/Nigeria Colony.png"
           }
         ]
       }
@@ -49592,24 +49590,24 @@
     "Portugal (colonial)": {
       "flag": null,
       "subdivisions": {
-        "Colonial entity": [
+        "Colonial Entity": [
           {
             "id": "00008095",
             "name": "Portuguese India",
-            "type": "Colonial entity",
-            "image": "FLAGS/Asia/Portugal (colonial)/Colonial entity/Portuguese India.png"
+            "type": "Colonial Entity",
+            "image": "FLAGS/Asia/Portugal (colonial)/Colonial Entity/Portuguese India.png"
           },
           {
             "id": "00008096",
             "name": "Portuguese Macau",
-            "type": "Colonial entity",
-            "image": "FLAGS/Asia/Portugal (colonial)/Colonial entity/Portuguese Macau.jpg"
+            "type": "Colonial Entity",
+            "image": "FLAGS/Asia/Portugal (colonial)/Colonial Entity/Portuguese Macau.jpg"
           },
           {
             "id": "00008097",
             "name": "Portuguese Timor",
-            "type": "Colonial entity",
-            "image": "FLAGS/Asia/Portugal (colonial)/Colonial entity/Portuguese Timor.png"
+            "type": "Colonial Entity",
+            "image": "FLAGS/Asia/Portugal (colonial)/Colonial Entity/Portuguese Timor.png"
           }
         ]
       }
@@ -197792,114 +197790,114 @@
         "image": "FLAGS/North America/Honduras/Honduras.png"
       },
       "subdivisions": {
-        "Deparmtent": [
+        "Department": [
           {
             "id": "00032664",
             "name": "Atlantida",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Atlantida.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Atlantida.webp"
           },
           {
             "id": "00032665",
             "name": "Bay Islands",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Bay Islands.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Bay Islands.webp"
           },
           {
             "id": "00032666",
             "name": "Choluteca",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Choluteca.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Choluteca.webp"
           },
           {
             "id": "00032667",
             "name": "Colon",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Colon.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Colon.webp"
           },
           {
             "id": "00032668",
             "name": "Comayagua",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Comayagua.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Comayagua.webp"
           },
           {
             "id": "00032669",
             "name": "Copan",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Copan.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Copan.webp"
           },
           {
             "id": "00032670",
             "name": "Cortés",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Cortés.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Cortés.webp"
           },
           {
             "id": "00032671",
             "name": "El Paraiso",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/El Paraiso.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/El Paraiso.webp"
           },
           {
             "id": "00032672",
             "name": "Francisco Morazan",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Francisco Morazan.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Francisco Morazan.webp"
           },
           {
             "id": "00032673",
             "name": "Gracias a Dios",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Gracias a Dios.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Gracias a Dios.webp"
           },
           {
             "id": "00032674",
             "name": "Intibuca",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Intibuca.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Intibuca.webp"
           },
           {
             "id": "00032675",
             "name": "La Paz",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/La Paz.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/La Paz.webp"
           },
           {
             "id": "00032676",
             "name": "Lempira",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Lempira.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Lempira.webp"
           },
           {
             "id": "00032677",
             "name": "Ocotepeque",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Ocotepeque.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Ocotepeque.webp"
           },
           {
             "id": "00032678",
             "name": "Olancho",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Olancho.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Olancho.webp"
           },
           {
             "id": "00032679",
             "name": "Santa Barbara",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Santa Barbara.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Santa Barbara.webp"
           },
           {
             "id": "00032680",
             "name": "Valle",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Valle.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Valle.webp"
           },
           {
             "id": "00032681",
             "name": "Yoro",
-            "type": "Deparmtent",
-            "image": "FLAGS/North America/Honduras/Deparmtent/Yoro.webp"
+            "type": "Department",
+            "image": "FLAGS/North America/Honduras/Department/Yoro.webp"
           }
         ]
       }
@@ -233839,198 +233837,198 @@
             "image": "FLAGS/Oceania/French Polynesia/City/Ua Pou.gif"
           }
         ],
-        "Islands": [
+        "Island": [
           {
             "id": "00038646",
             "name": "Austral Islands",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Austral Islands.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Austral Islands.gif"
           },
           {
             "id": "00038647",
             "name": "Bora Bora",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Bora Bora.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Bora Bora.gif"
           },
           {
             "id": "00038648",
             "name": "Fatu Hiva",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Fatu Hiva.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Fatu Hiva.gif"
           },
           {
             "id": "00038649",
             "name": "Gambier Islands",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Gambier Islands.png"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Gambier Islands.png"
           },
           {
             "id": "00038650",
             "name": "Hao",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Hao.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Hao.gif"
           },
           {
             "id": "00038651",
             "name": "Hiva Oa",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Hiva Oa.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Hiva Oa.gif"
           },
           {
             "id": "00038652",
             "name": "Huahine",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Huahine.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Huahine.gif"
           },
           {
             "id": "00038653",
             "name": "Leeward Islands",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Leeward Islands.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Leeward Islands.gif"
           },
           {
             "id": "00038654",
             "name": "Makatea",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Makatea.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Makatea.gif"
           },
           {
             "id": "00038655",
             "name": "Mangareva",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Mangareva.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Mangareva.gif"
           },
           {
             "id": "00038656",
             "name": "Marquesas Islands",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Marquesas Islands.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Marquesas Islands.gif"
           },
           {
             "id": "00038657",
             "name": "Maupiti",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Maupiti.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Maupiti.gif"
           },
           {
             "id": "00038658",
             "name": "Moorea",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Moorea.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Moorea.gif"
           },
           {
             "id": "00038659",
             "name": "Nuku Hiva",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Nuku Hiva.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Nuku Hiva.gif"
           },
           {
             "id": "00038660",
             "name": "Puka Puka",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Puka Puka.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Puka Puka.gif"
           },
           {
             "id": "00038661",
             "name": "Raiatea",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Raiatea.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Raiatea.gif"
           },
           {
             "id": "00038662",
             "name": "Raivavae",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Raivavae.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Raivavae.gif"
           },
           {
             "id": "00038663",
             "name": "Rangiroa",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Rangiroa.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Rangiroa.gif"
           },
           {
             "id": "00038664",
             "name": "Rapa",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Rapa.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Rapa.gif"
           },
           {
             "id": "00038665",
             "name": "Reao Puka Ruha",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Reao Puka Ruha.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Reao Puka Ruha.gif"
           },
           {
             "id": "00038666",
             "name": "Rikitea",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Rikitea.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Rikitea.gif"
           },
           {
             "id": "00038667",
             "name": "Rimatara",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Rimatara.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Rimatara.gif"
           },
           {
             "id": "00038668",
             "name": "Rurutu",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Rurutu.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Rurutu.gif"
           },
           {
             "id": "00038669",
             "name": "Tahaa",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Tahaa.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Tahaa.gif"
           },
           {
             "id": "00038670",
             "name": "Tahiti",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Tahiti.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Tahiti.gif"
           },
           {
             "id": "00038671",
             "name": "Tahuata",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Tahuata.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Tahuata.gif"
           },
           {
             "id": "00038672",
             "name": "Tatakoko",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Tatakoko.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Tatakoko.gif"
           },
           {
             "id": "00038673",
             "name": "Tuamotu Islands",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Tuamotu Islands.png"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Tuamotu Islands.png"
           },
           {
             "id": "00038674",
             "name": "Tubuai",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Tubuai.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Tubuai.gif"
           },
           {
             "id": "00038675",
             "name": "Ua Huka",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Ua Huka.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Ua Huka.gif"
           },
           {
             "id": "00038676",
             "name": "Ua Pou",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Ua Pou.gif"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Ua Pou.gif"
           },
           {
             "id": "00038677",
             "name": "Windward Islands",
-            "type": "Islands",
-            "image": "FLAGS/Oceania/French Polynesia/Islands/Windward Islands.png"
+            "type": "Island",
+            "image": "FLAGS/Oceania/French Polynesia/Island/Windward Islands.png"
           }
         ]
       }
