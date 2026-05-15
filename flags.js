@@ -344,7 +344,7 @@ fetch("./dataFlags.json")
     updateTypeFilter(flags);
 
     resultsInfo.textContent =
-      `${flags.length} résultat(s) trouvé(s)`;
+      `${flags.length} result(s)`;
 
     resetDisplay();
 
